@@ -315,7 +315,6 @@ rem
 rem OpenSSL variables
 rem 
 rem if not defined RSA_PRIVATE_KEY_FILE (
-set RSA_PRIVATE_KEY_FILE=C:\xampp\htdocs\_crts\VS.key
 rem )
 rem set PUBLIC_KEY_FILE=C:\xampp\htdocs\_crts\vsKey.pub
 rem get password provided by stdin

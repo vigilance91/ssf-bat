@@ -366,7 +366,7 @@ rem     rem Please enter a file extension for filtering files,
 rem ) 
 rem if not defined PKP (
 rem if defined RSA_PRIVATE_KEY_FILE (
-rem set RSA_PRIVATE_KEY_FILE=C:\xampp\htdocs\_crts\VS.key
+rem 
 rem )
 rem else (
 rem set /P PKP=Please enter a local path to your private key, 

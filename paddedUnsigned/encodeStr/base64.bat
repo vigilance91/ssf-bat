@@ -60,98 +60,97 @@ rem
 if "%1"=="" (
     rem echo continuing with script execution
     goto continue
-) else (
+)
+rem echo %1
+if "%1"=="--d" (
+    rem echo pre-shift %1
+    rem shift
+    rem echo post-shift %1
+    rem rem set dl=%1
+    rem if "%1"=="" (
+    rem     rem if debug mode is enabled, expected value to be in range [0,4]
+    rem     echo no debug flag set, epectected value betwenn [0,4], includsive
+    rem     exit /B -1
+    rem )
     rem echo %1
-    if "%1"=="--d" (
-        rem echo pre-shift %1
-        rem shift
-        rem echo post-shift %1
-        rem rem set dl=%1
-        rem if "%1"=="" (
-        rem     rem if debug mode is enabled, expected value to be in range [0,4]
-        rem     echo no debug flag set, epectected value betwenn [0,4], includsive
-        rem     exit /B -1
+    rem ) else if if "%1"=="5" (
+    if not defined _D (
+        rem echo setting _D flag
+        rem if "%1"=="0" (
+            rem set F_DBG=--d=0
+        rem ) else if "%1"=="1" (
+            rem set F_DBG=--d=1
+        rem ) else if "%1"=="2" (
+            rem set F_DBG=--d=2
+        rem ) else if "%1"=="3" (
+            set _D=--d=3
+        rem ) else if "%1"=="4" (
+            rem set F_DBG=--d=4
+        rem ) else (
+        rem echo %_D%    
         rem )
-        rem echo %1
-        rem ) else if if "%1"=="5" (
-        if not defined _D (
-            rem echo setting _D flag
-            rem if "%1"=="0" (
-                rem set F_DBG=--d=0
-            rem ) else if "%1"=="1" (
-                rem set F_DBG=--d=1
-            rem ) else if "%1"=="2" (
-                rem set F_DBG=--d=2
-            rem ) else if "%1"=="3" (
-                set _D=--d=3
-            rem ) else if "%1"=="4" (
-                rem set F_DBG=--d=4
-            rem ) else (
-            rem echo %_D%    
-            rem )
-            
-            rem echo from command line args
-        ) 
-        rem 
-        rem echo %_D%
-    ) else if "%~1"=="--v" (
-        if not defined VERB ( set "VERB=--v" )
-    ) else if "%~1"=="--h" (
-        if not defined HELP ( set "HELP=--h" )
-    ) else if "%~1"=="--q" (
-        if not defined _QUIET ( set "_QUIET=--q" )
-    ) else if "%~1"=="--ssf64" (
-        if not defined _SSF64 ( set "_SSF64=--ssf64" )
-    ) else if "%~1"=="--chunk" (
-        if not defined _CHUNK ( set "_CHUNK=--chunk" )
-    ) else if "%~1"=="--compress" (
-        if not defined _COMPRESS ( set "_COMPRESS=--compress" )
-    ) else if "%1"=="--pw" (
-        shift
-        if "%~1"=="" (
-            set /P UPW=Please enter your private key password:
-        ) else (
-            set UPW=%~1
-        )
-    ) else if "%1"=="--src" (
-        shift
-        if "%~1"=="" (
-            set /P SRC=Please enter a string to encode:
-        ) else (
-            set SRC=%~1
-        )
+        
+        rem echo from command line args
+    ) 
+    rem 
+    rem echo %_D%
+) else if "%~1"=="--v" (
+    if not defined VERB ( set "VERB=--v" )
+) else if "%~1"=="--h" (
+    if not defined HELP ( set "HELP=--h" )
+) else if "%~1"=="--q" (
+    if not defined _QUIET ( set "_QUIET=--q" )
+) else if "%~1"=="--ssf64" (
+    if not defined _SSF64 ( set "_SSF64=--ssf64" )
+) else if "%~1"=="--chunk" (
+    if not defined _CHUNK ( set "_CHUNK=--chunk" )
+) else if "%~1"=="--compress" (
+    if not defined _COMPRESS ( set "_COMPRESS=--compress" )
+) else if "%1"=="--pw" (
+    shift
+    if "%~1"=="" (
+        set /P UPW=Please enter your private key password:
+    ) else (
+        set UPW=%~1
     )
-    rem else if "%1"=="--pk" (
-    rem     shift
-    rem     if "%~1"=="" (
-    rem         set /P RSA_PRIVATE_KEY_FILE=Please enter your private key path:
-    rem     ) else (
-    rem         if not defined RSA_PRIVATE_KEY_FILE (
-    rem             set "RSA_PRIVATE_KEY_FILE=..."
-    rem         )
-    rem     )
-    rem )
-    rem @note if neither --hex nor --base64 flag are specified, both encodings will be output
-    rem 
-    rem else if "%1"=="--S" (
-    rem     if defined _U ( exit /B 1 )
-    rem     if not defined _S ( set _S=--g )
-    rem )
-    rem 
-    
-    
-    rem if defined D ( set D=)
-    rem if defined VERB ( set VERB= )
-    rem if defined HELP ( set HELP= )
-    rem if defined FLAGS ( set FLAGS= )
-    rem 
-    rem else if "%1"=="--od" (
-        rem shift
-        rem if not defined OD (
-            rem set OD="%1"
-        rem ) 
+) else if "%1"=="--src" (
+    shift
+    if "%~1"=="" (
+        set /P SRC=Please enter a string to encode:
+    ) else (
+        set SRC=%~1
+    )
+)
+rem else if "%1"=="--pk" (
+rem     shift
+rem     if "%~1"=="" (
+rem         set /P RSA_PRIVATE_KEY_FILE=Please enter your private key path:
+rem     ) else (
+rem         if not defined RSA_PRIVATE_KEY_FILE (
+rem             set "RSA_PRIVATE_KEY_FILE=..."
+rem         )
+rem     )
+rem )
+rem @note if neither --hex nor --base64 flag are specified, both encodings will be output
+rem 
+rem else if "%1"=="--S" (
+rem     if defined _U ( exit /B 1 )
+rem     if not defined _S ( set _S=--g )
+rem )
+rem 
+
+
+rem if defined D ( set D=)
+rem if defined VERB ( set VERB= )
+rem if defined HELP ( set HELP= )
+rem if defined FLAGS ( set FLAGS= )
+rem 
+rem else if "%1"=="--od" (
+    rem shift
+    rem if not defined OD (
+        rem set OD="%1"
     rem ) 
-) 
+rem ) 
 rem echo %1
 shift
 goto loop
@@ -278,11 +277,7 @@ rem
 rem 
 rem Make output directories if they do not exists
 rem 
-call :mkDirIfNotExists "%OD%"
-rem 
-rem exit /B %ERRORLEVEL%
-rem 
-call :mkDirIfNotExists "%PACKED_UNSIGNED_OD%"
+call :mkDirIfNotExists "%OD%" & call :mkDirIfNotExists "%PACKED_UNSIGNED_OD%"
 rem call :mkDirIfNotExists "%PACKED_SIGNED_OD%"
 rem 
 if not defined _QUIET ( call :truncLog %LF% )
@@ -292,7 +287,7 @@ rem
 rem OpenSSL variables
 rem 
 rem if not defined RSA_PRIVATE_KEY_FILE (
-set RSA_PRIVATE_KEY_FILE=C:\xampp\htdocs\_crts\VS.key
+rem 
 rem )
 rem set PUBLIC_KEY_FILE=C:\xampp\htdocs\_crts\vsKey.pub
 rem get password provided by stdin

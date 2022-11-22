@@ -336,7 +336,6 @@ rem
 rem if not defined RSA_PRIVATE_KEY_FILE (
 rem     set /P RSA_PRIVATE_KEY_FILE=Please enter your private key path:
 rem )
-set RSA_PRIVATE_KEY_FILE=C:\xampp\htdocs\_crts\VS.key
 rem )
 rem set PUBLIC_KEY_FILE=C:\xampp\htdocs\_crts\vsKey.pub
 rem get password provided by stdin

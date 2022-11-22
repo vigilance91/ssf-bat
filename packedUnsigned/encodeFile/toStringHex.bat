@@ -498,9 +498,11 @@ rem
 rem 
 if not defined _QUIET (
     if defined _D (
-        echo %VS_BANNER% >> %LF%
-        echo script cleanup >> %LF%
-        echo %VS_SEP% >> %LF%
+        (
+            echo %VS_BANNER%
+            echo script cleanup
+            echo %VS_SEP%
+        ) >> %LF%
     )
 )
 rem

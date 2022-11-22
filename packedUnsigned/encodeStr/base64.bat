@@ -352,11 +352,7 @@ rem )
 rem 
 rem Make output directories if they do not exists
 rem 
-call :mkDirIfNotExists "%OD%"
-rem 
-rem exit /B %ERRORLEVEL%
-rem 
-call :mkDirIfNotExists "%PACKED_UNSIGNED_OD%"
+call :mkDirIfNotExists "%OD%" & call :mkDirIfNotExists "%PACKED_UNSIGNED_OD%"
 rem call :mkDirIfNotExists "%PACKED_SIGNED_OD%"
 rem 
 if not defined _QUIET ( call :truncLog %LF% )
@@ -469,9 +465,11 @@ rem
 rem 
 if not defined _QUIET (
     if defined _D (
-        echo %VS_BANNER% >> %LF%
-        echo script cleanup >> %LF%
-        echo %VS_SEP% >> %LF%
+        (
+            echo %VS_BANNER%
+            echo script cleanup
+            echo %VS_SEP%
+        ) >> %LF%
     )
 )
 rem

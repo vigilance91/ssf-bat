@@ -329,7 +329,6 @@ rem     rem Please enter a file extension for filtering files,
 rem ) 
 rem if not defined PKP (
 rem if defined RSA_PRIVATE_KEY_FILE (
-rem set RSA_PRIVATE_KEY_FILE=C:\xampp\htdocs\_crts\VS.key
 rem )
 rem else (
 rem set /P PKP=Please enter a local path to your private key, 
@@ -369,11 +368,13 @@ call :truncLog %PACKED_UNSIGNED_BASE64_LFP%
 
 if defined _D (
     if not defined _QUIET (
-        echo SSF encode directory, packed unsigned base64 >> %LF_PACKED_UNSIGNED_BASE64%
-        echo %VS_SEP% >> %LF_PACKED_UNSIGNED_BASE64%
-        echo encoding: %%f >> %LF_PACKED_UNSIGNED_BASE64%
-        rem echo to: "%PACKED_SIGNED_HEX_LFP%" >> %LF_PACKED_SIGNED_HEX%
-        echo %VS_SEP% >> %LF_PACKED_UNSIGNED_BASE64%
+        (
+            echo SSF encode directory, packed unsigned base64
+            echo %VS_SEP%
+            echo encoding: %%f
+            rem echo to: "%PACKED_SIGNED_HEX_LFP%"
+            echo %VS_SEP%
+        ) >> %LF_PACKED_UNSIGNED_BASE64%
     )
 )
 rem 
@@ -383,10 +384,12 @@ for /R %cd% %%f in (
     %_CLI_EXT%
 ) do (
     rem %php5% -f %VSN_SSF_CLI_PHP56_DIR%/run%XT_PHP% -- --M=encode --F=f --source=%%f --hex --v --d=3
-    echo %%f ssf32 = >> %LF_PACKED_UNSIGNED_BASE64%
-    %php5% %VSN_SSF_CLI_PHP56_DIR%/run%XT_PHP% --M=encode --F=fts --source=%%f --base64 >> %LF_PACKED_UNSIGNED_BASE64%
-    echo; >> %LF_PACKED_UNSIGNED_BASE64%
-    echo %VS_SEP% >> %LF_PACKED_UNSIGNED_BASE64%
+    (
+        echo %%f ssf32 = 
+        %php5% %VSN_SSF_CLI_PHP56_DIR%/run%XT_PHP% --M=encode --F=fts --source=%%f --base64
+        echo;
+        echo %VS_SEP%
+    ) >> %LF_PACKED_UNSIGNED_BASE64%
     
     if %ERRORLEVEL% NEQ 0 (
         if defined _D (
@@ -434,9 +437,11 @@ rem
 :dealloc
 rem 
 if defined _D (
-    echo %VS_BANNER% >> %LF%
-    echo script cleanup >> %LF%
-    echo %VS_SEP% >> %LF%
+    (
+        echo %VS_BANNER%
+        echo script cleanup
+        echo %VS_SEP%
+    ) >> %LF%
 )
 rem
 if defined _D ( echo removing XT >> %LF% )
@@ -544,10 +549,12 @@ exit /b
 rem 
 :truncLog
 echo %VS_BANNER% > %1 2>&1
-echo @author Tyler R. Drury (vigilance.eth) >> %~1 2>&1
-echo @date 10-11-2022 >> %~1 2>&1
-echo @copyright Tyler R. Drury, All Rights Reserved >> %~1 2>&1
-echo @created %DATE% @ %TIME% >> %~1 2>&1
-echo %VS_SEP% >> %~1 2>&1
+(
+    echo @author Tyler R. Drury (vigilance.eth)
+    echo @date 10-11-2022
+    echo @copyright Tyler R. Drury, All Rights Reserved
+    echo @created %DATE% @ %TIME%
+    echo %VS_SEP%
+) >> %1 2>&1
 exit /b
 rem 
